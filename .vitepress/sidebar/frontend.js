@@ -8,6 +8,7 @@ const frontend = [
 			{text: 'CSS实现固定宽高比', link: '/frontend/css/CSS实现固定宽高比.md'},
 			{text: '修改SVG颜色', link: '/frontend/css/修改SVG颜色/'},
 			{text: 'backdrop-filter属性', link: '/frontend/css/backdrop-filter属性/'},
+			{text: '@support', link: '/frontend/css/support'},
 			{text: 'BFC', link: '/frontend/css/BFC/'},
 		]
 	},
@@ -17,6 +18,8 @@ const frontend = [
 		items: [
 			{text: '实现准时的setTimeout', link: '/frontend/js/实现准时的setTimeout/'},
 			{text: 'H5如何唤起APP', link: '/frontend/js/H5唤起APP'},
+			{text: '尾调用优化', link: '/frontend/js/尾调用优化/'},
+			{text: '前端安全', link: '/frontend/js/前端安全'},
 			{text: '有100个请求如何控制并发', link: '/frontend/js/有100个请求如何控制并发'},
 		]
 	},
@@ -82,6 +85,7 @@ const frontend = [
 			{text: 'Clipboard API', link: '/frontend/bom/Clipboard.md'},
 			{text: 'WebComponents', link: '/frontend/bom/WebComponents.md'},
 			{text: 'Server Sent Events', link: '/frontend/bom/Server_Sent_Events.md'},
+			{text: 'IntersectionObserver', link: '/frontend/bom/IntersectionObserver/'},
 		]
 	},
 	{
@@ -98,8 +102,9 @@ const frontend = [
 		text: 'nodejs',
 		collapsed: true,
 		items: [
-			{text: 'node定时器', link: '/frontend/nodejs/node定时器'},
+			{text: 'node定时器', link: '/frontend/nodejs/Node定时器/'},
 			{text: '关于npm', link: '/frontend/nodejs/npm'},
+			{text: 'Node.js命令行程序开发', link: '/frontend/nodejs/Node.js命令行程序开发'},
 		]
 	},
 	{

@@ -28,31 +28,59 @@
 这样一来，我们就可以在 project 1 的 node_module 中会看到链接过来的模块包 npm-package-1，此时的 npm-package-1 就带有最新开发的 feature A，
 这样一来就可以在 project 1 中正常开发调试 npm-package-1。当然别忘了，调试结束后可以执行***npm unlink***以取消关联。
 
-## npx的作用
+## npx
 
-npx 执行「npm execute」npm包的二进制文件， npx由***npm v5.2***版本引入，解决了npm的一些使用快速开发、调试，以及项目内使用全局模块的痛点。
-在传统npm模式下，如果我们需要使用代码检测工具ESLint，就要先通过npm install安装：
+### 调用项目安装的模块
+
+npx 想要解决的主要问题，就是调用项目内部安装的模块。比如，项目内部安装了测试工具 typescript
+
+一般来说调用 `tsc`，只能在项目脚本和package.json 的scripts字段里面， 如果想在命令行下调用，必须像下面这样
 
 ```shell
-npm install eslint --save-dev
-./node_modules/.bin/eslint --init
-./node_modules/.bin/eslint yourfile.js
-
-# 而使用npx就简单多了，你只需要下面2个操作步骤：
-npx eslint --init
-npx eslint yourfile.js
+# 项目的根目录下执行
+node-modules/.bin/tsc --version
 ```
 
-为什么 npx 操作起来如此便捷呢？
-
-这是因为它可以直接执行`node_modules/.bin`文件夹下的文件。在运行命令时，`npx`可以自动去`node_modules/.bin`路径和环境变量`$PATH`里面检查命令是否存在，
-而不需要再在`package.json`中定义相关的 `script`。
-
-npx 另一个更实用的好处是：npx 执行模块时会优先安装依赖，但是在安装执行后便删除此依赖，这就避免了全局安装模块带来的问题。
-运行如下命令后，`npx`会将`create-react-app`下载到一个临时目录，使用以后再删除：
+npx 就是想解决这个问题，让项目内部安装的模块用起来更方便，只要像下面这样调用就行了
 
 ```shell
-npx create-react-app cra-project
+npx tsc --version
+```
+
+### 避免全局安装模块
+
+除了调用项目内部模块，npx还能避免全局安装的模块。比如，`create-react-app` 这个模块是全局安装，npx可以运行它，而且不进行全局安装
+
+```shell
+npx create-react-app react-demo
+```
+
+上面代码运行时，npx将 `create-react-app` 下载到一个临时目录，使用以后再删除。所以，以后再次执行上面的命令，会重新下载 `create-react-app`
+
+下载全局模块时，npx允许指定版本
+
+```shell
+npx uglify-js@3.1.0 main.js -o ./dist/main.js
+```
+
+上面代码指定使用 3.1.0 版本的uglify-js压缩脚本
+
+注意，只要npx后面的模块无法在本地发现，就会下载同名模块。比如，本地没有安装 `http-server` 模块，下面的命令会自动下载该模块，在当前目录启动一个Web服务
+
+```shell
+npx http-server
+```
+
+### 执行 GitHub 源码
+
+npx 还可以执行GitHub上面的模块源码。
+
+```shell
+# 执行 Gist 代码
+npx https://gist.github.com/zkat/4bc19503fe9e9309e2bfaa2c58074d32
+
+# 执行仓库代码
+npx github:piuccio/cowsay hello
 ```
 
 ## Corepack
