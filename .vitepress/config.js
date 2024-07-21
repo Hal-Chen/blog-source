@@ -10,7 +10,7 @@ export default defineConfig({
   srcDir: './src',
   outDir: './dist',
   themeConfig: {
-    siteTitle: '苦逼全栈程序员',
+    siteTitle: 'An Enlightened Mule',
     logo: '/logo.jpg',
     nav: [
       { text: '前端', link: '/frontend/' },
